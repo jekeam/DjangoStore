@@ -23,20 +23,41 @@ All actions should be executed from the source directory of the project and only
    pip install --upgrade pip
    pip install -r requirements.txt
    ```
-   
-3. Run project dependencies, migrations, fill the database with the fixture data etc.:
+
+3. Install PostgreSQL, create user and databse:
    ```bash
-   ./manage.py migrate
-   ./manage.py loaddata <path_to_fixture_files>
-   ./manage.py runserver 
+   sudo apt-get update
+   ```
+   ```bash
+   sudo apt-get install postgresql postgresql-contrib
+   ```
+   ```bash
+   sudo service postgresql start
+   ```
+   ```bash
+   sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'admin';"
+   ```
+   ```bash
+   sudo -u postgres createdb store
    ```
    
-4. Run [Redis Server](https://redis.io/docs/getting-started/installation/):
+5. Run project dependencies, migrations, fill the database with the fixture data etc.:
+   ```bash
+   python ./manage.py migrate
+   ```
+   ```bash
+   python ./manage.py loaddata <path_to_fixture_files>
+   ```
+   ```bash
+   python ./manage.py runserver 
+   ```
+   
+6. Run [Redis Server](https://redis.io/docs/getting-started/installation/):
    ```bash
    redis-server
    ```
    
-5. Run Celery:
+7. Run Celery:
    ```bash
    celery -A store worker --loglevel=INFO
    ```
