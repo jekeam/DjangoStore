@@ -31,12 +31,15 @@ All actions should be executed from the source directory of the project and only
    ./manage.py runserver 
    ```
    
-4. Run [Redis Server](https://redis.io/docs/getting-started/installation/):
+4. Install and Run [Redis Server](https://redis.io/docs/getting-started/installation/):
+   ```bash
+   sudo apt install redis-server
+   ```
    ```bash
    redis-server
    ```
    
-5. Run Celery:
+6. Run Celery:
    ```bash
    celery -A store worker --loglevel=INFO
    ```
